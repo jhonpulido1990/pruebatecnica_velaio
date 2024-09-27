@@ -1,0 +1,19 @@
+@use 'variables.scss' as variables;
+
+@mixin big-desktop() {
+  @media screen and (min-width: variables.$screen-big-desktop) {
+    @content;
+  }
+}
+
+@mixin desktop() {
+  @media screen and (min-width: variables.$screen-desktop) {
+    @content;
+  }
+}
+
+@mixin tablet() {
+  @media screen and (min-width: variables.$screen-tablet) {
+    @content;
+  }
+}

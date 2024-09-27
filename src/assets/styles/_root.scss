@@ -1,0 +1,117 @@
+@use './_variables.scss';
+
+/* Restablecer márgenes y rellenos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Restablecer listas */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Restablecer enlaces */
+a {
+  text-decoration: none;
+}
+
+/* Restablecer imágenes */
+img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Restablecer formularios */
+input,
+textarea,
+select {
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+}
+
+/* Restablecer tablas */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Restablecer celdas de tabla */
+th,
+td {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  /* Peso Regular para texto normal */
+  background-color: variables.color(deep-blue);
+  /* Fondo Azul Claro */
+  color: variables.color(sand-white);
+  /* Texto Principal Negro */
+}
+
+h1,
+h2 {
+  font-weight: variables.$text_bold;
+  /* Bold para h1 y h2 */
+}
+
+h3,
+h4 {
+  font-weight: variables.$text_semibold;
+  /* Semi-Bold para h3 y h4 */
+}
+
+h5,
+h6 {
+  font-weight: variables.$text_medium;
+  /* Medium para h5 y h6 */
+}
+
+p {
+  font-weight: variables.$text_regular;
+  /* Regular para párrafos */
+  color: variables.color(sand-white);
+  /* Gris Oscuro para texto secundario */
+}
+
+a {
+  font-weight: variables.$text_medium;
+  /* Medium para enlaces */
+  color: variables.color(sand-white);
+  /* Naranja para enlaces */
+  text-decoration: none;
+
+  &:hover {
+    color: variables.color(algae-green);
+    /* Naranja oscuro para hover */
+  }
+}
+
+
+button {
+  font-weight: variables.$text_semibold;
+  /* Semi-Bold para botones */
+  background-color: variables.color(navy-blue);
+  /* Naranja para botones */
+  color: variables.color(sand-white);
+  /* Texto del botón blanco */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: variables.color(dark-turquoise);
+    /* Naranja oscuro para hover */
+  }
+}

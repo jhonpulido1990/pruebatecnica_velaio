@@ -1,0 +1,42 @@
+$colors: (
+  /* Variables de tema claro */
+  background-light: #E3F2FD,
+  text-main-light: #000000,
+  text-secondary-light: #666666,
+  accent-light: #FF9800,
+
+  /* Variables de tema oscuro */
+  background-dark: #121212,
+  text-main-dark: #FFFFFF,
+  text-secondary-dark: #B0B0B0,
+  accent-dark:#F57C00,
+
+  /* nuevos estilos */
+  deep-blue: #002B5B,
+  navy-blue: #005377,
+  dark-turquoise: #007B8F,
+  sea-green: #00918A,
+  algae-green: #00A48A,
+  stone-gray: #4A4A4A,
+  sand-white: #F4F4F9,
+);
+
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+}
+
+/* tamaño de pantalla */
+$screen-desktop: 1024px;
+$screen-tablet: 768px;
+/* tamaño de letras */
+$text_size_xlarge: 40px;
+$text_size_large: 32px;
+$text_size_medium: 28px;
+$text_size-normal: 24px;
+$text_size_small: 22px;
+$text_size_xsmall: 20px;
+/* font weigth */
+$text_bold: 700;
+$text_semibold: 600;
+$text_medium: 500;
+$text_regular: 400;

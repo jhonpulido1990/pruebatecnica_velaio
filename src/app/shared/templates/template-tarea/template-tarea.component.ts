@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CrudTareaComponent } from '../../organism/crud-tarea/crud-tarea.component';
 
 @Component({
   selector: 'app-template-tarea',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CrudTareaComponent],
   templateUrl: './template-tarea.component.html',
   styleUrls: ['./template-tarea.component.scss']
 })

@@ -1,0 +1,53 @@
+<p>crud-tarea works! listado de tareas</p>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="nombre">Nombre</label>
+    <input id="nombre" formControlName="nombre" />
+    <article *ngIf="isValidField('nombre')">
+      {{ getFieldError('nombre') }}
+    </article>
+  </div>
+
+  <div>
+    <label for="fecha">Fecha</label>
+    <input id="fecha" type="date" formControlName="fecha" />
+    <article *ngIf="isValidField('fecha')">
+      {{ getFieldError('fecha') }}
+    </article>
+  </div>
+
+  <div formArrayName="asociados">
+    <div *ngFor="let asociado of asociados.controls; let i = index" [formGroupName]="i">
+      <h4>Asociado {{ i + 1 }}</h4>
+
+      <label for="asociado-nombre">Nombre</label>
+      <input id="asociado-nombre" formControlName="nombre" />
+      <article *ngIf="isValidFieldArray( asociados,'nombre', i)">
+        {{getFieldErrorArray(asociados,'nombre', i)}}
+      </article>
+
+      <label for="asociado-edad">Edad</label>
+      <input id="asociado-edad" formControlName="edad" />
+      <article *ngIf="isValidFieldArray( asociados,'edad', i)">
+        {{getFieldErrorArray(asociados,'edad', i)}}
+      </article>
+
+      <div formArrayName="habilidades">
+        <div *ngFor="let habilidad of getHabilidades(i).controls; let j = index" [formGroupName]="j">
+          <label for="habilidad-{{i}}-{{j}}">Habilidad {{ j + 1 }}</label>
+          <input id="habilidad-{{i}}-{{j}}" formControlName="habilidad" />
+          <article *ngIf="isValidFieldArray( getHabilidades(i),'habilidad', i)">
+            {{getFieldErrorArray(getHabilidades(i),'habilidad', i)}}
+          </article>
+          <button type="button" (click)="removeHabilidad(i, j)"><p>Eliminar Habilidad</p></button>
+        </div>
+        <button type="button" (click)="addHabilidad(i)"><p>Agregar Habilidad</p></button>
+      </div>
+
+      <button type="button" (click)="removeAsociado(i)"><p>Eliminar Asociado</p></button>
+    </div>
+  </div>
+
+  <button type="button" (click)="addAsociado()"><p>Agregar Asociado</p></button>
+  <button type="submit"><p>Enviar</p></button>
+</form>

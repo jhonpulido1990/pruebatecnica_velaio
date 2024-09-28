@@ -1,0 +1,59 @@
+{
+  "formularios": [
+    {
+      "id": "623298ea-6302-4804-b659-8ca46e0e85f6",
+      "nombre": "Jhon pulido",
+      "fecha": "2024-09-28",
+      "estado": true,
+      "asociados": [
+        {
+          "nombre": "jhonj",
+          "edad": "18",
+          "habilidades": [
+            {
+              "habilidad": "gkmgumi"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "0f250933-c947-45e0-8820-394131a08e92",
+      "nombre": "proyecto 1",
+      "fecha": "2024-10-06",
+      "estado": false,
+      "asociados": [
+        {
+          "nombre": "pipe antonio",
+          "edad": "40",
+          "habilidades": [
+            {
+              "habilidad": "angular"
+            },
+            {
+              "habilidad": "nodejs"
+            },
+            {
+              "habilidad": "nest"
+            }
+          ]
+        },
+        {
+          "nombre": "jhonj",
+          "edad": "18",
+          "habilidades": [
+            {
+              "habilidad": "react"
+            },
+            {
+              "habilidad": "javascript"
+            },
+            {
+              "habilidad": "nodejs"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

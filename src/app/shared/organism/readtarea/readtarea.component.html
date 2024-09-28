@@ -1,0 +1,40 @@
+<p>readtarea works!</p>
+
+<table class="accordion__item__content__container__table">
+  <thead class="accordion__item__content__container__table__thead">
+    <tr class="accordion__item__content__container__table__thead__tr">
+      <th class="accordion__item__content__container__table__thead__tr__th">Titulo</th>
+      <th class="accordion__item__content__container__table__thead__tr__th">Fecha</th>
+      <th class="accordion__item__content__container__table__thead__tr__th">Estado</th>
+      <th class="accordion__item__content__container__table__thead__tr__th">Personas</th>
+      <th class="accordion__item__content__container__table__thead__tr__th">Operacion</th>
+    </tr>
+  </thead>
+  <tbody class="accordion__item__content__container__table__tbody">
+    <tr class="accordion__item__content__container__table__tbody__tr" *ngFor="let tarea of listTareas()">
+      <td class="accordion__item__content__container__table__tbody__tr__td">{{ tarea.nombre }}</td>
+      <td class="accordion__item__content__container__table__tbody__tr__td">{{ tarea.fecha }}</td>
+      <td class="accordion__item__content__container__table__tbody__tr__td">{{ !tarea.estado ? 'complatado' : 'pendiente' }}</td>
+      <td class="accordion__item__content__container__table__tbody__tr__td">
+        <div *ngFor="let socio of tarea.asociados">
+          persona: {{ socio.nombre }}
+          edad: {{ socio.edad }}
+          habilidades: [
+          <div *ngFor="let habilidad of socio.habilidades">
+            {{ habilidad.habilidad }}
+          </div>
+          ]
+        </div>
+      </td>
+      <td class="accordion__item__content__container__table__tbody__tr__td">
+        <button class="pi pi-trash accordion__item__content__container__table__tbody__tr__td__btn" (click)="deleteTarea(tarea.id)" ></button>
+        <div *ngIf="tarea.estado">
+          <button class="pi pi-check accordion__item__content__container__table__tbody__tr__td__btn" (click)="updateStatus(tarea)" ></button>
+        </div>
+        <div *ngIf="!tarea.estado">
+          <button class="pi pi-times accordion__item__content__container__table__tbody__tr__td__btn"  (click)="updateStatus(tarea)"></button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

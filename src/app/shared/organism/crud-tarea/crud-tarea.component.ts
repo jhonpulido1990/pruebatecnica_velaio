@@ -10,6 +10,9 @@ import {
 } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { noDuplicateNamesValidator } from './validacion_personalizado';
+import { v4 as uuidv4 } from 'uuid';
+import { FormService } from 'src/app/core/service/form.service';
+
 
 @Component({
   selector: 'app-crud-tarea',
@@ -21,9 +24,11 @@ import { noDuplicateNamesValidator } from './validacion_personalizado';
 export class CrudTareaComponent {
   /* variables */
   private fb = inject(FormBuilder);
+  private formService = inject(FormService)
 
   /* variables del formulario */
   public myForm: FormGroup = this.fb.group({
+    id: [uuidv4()],
     nombre: ['', [Validators.required]],
     fecha: ['', [Validators.required]],
     estado: [false],
@@ -156,6 +161,13 @@ export class CrudTareaComponent {
       this.myForm.markAllAsTouched();
       return;
     }
-    console.log(this.myForm.value);
+    this.formService.saveForm(this.myForm.value).subscribe({
+      next: () => {
+        console.log('cargado con exito')
+      },
+      error: () => {
+        console.log('no se logro el objetivo')
+      }
+    })
   }
 }

@@ -1,9 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   AbstractControl,
   FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -12,19 +13,22 @@ import { InputTextModule } from 'primeng/inputtext';
 import { noDuplicateNamesValidator } from './validacion_personalizado';
 import { v4 as uuidv4 } from 'uuid';
 import { FormService } from 'src/app/core/service/form.service';
-
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-crud-tarea',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputTextModule],
+  imports: [CommonModule, ReactiveFormsModule, InputTextModule, RouterModule],
   templateUrl: './crud-tarea.component.html',
   styleUrls: ['./crud-tarea.component.scss'],
 })
-export class CrudTareaComponent {
+export class CrudTareaComponent implements OnInit {
   /* variables */
   private fb = inject(FormBuilder);
-  private formService = inject(FormService)
+  private formService = inject(FormService);
+  private route = inject(Router);
+  @Input() id: string | null = null;
+  public tarea: any;
 
   /* variables del formulario */
   public myForm: FormGroup = this.fb.group({
@@ -35,11 +39,41 @@ export class CrudTareaComponent {
     asociados: this.fb.array([]),
   });
 
+  ngOnInit() {
+    if (this.id) {
+      this.formService.getTaskById(this.id).subscribe({
+        next: (tarea) => {
+          // Resetear los valores básicos del formulario
+          this.myForm.reset(tarea);
+          this.myForm.setControl('asociados', this.fb.array(tarea.asociados || []))
+        },
+      });
+    }
+  }
+
+  // Función para crear un FormGroup para cada asociado
+  createAsociadoarray(asociado: any): FormGroup {
+    return this.fb.group({
+      nombre: [asociado.nombre],
+      edad: [asociado.edad],
+      habilidades: this.fb.array(
+        asociado.habilidades.map((habilidad: any) => new FormControl(habilidad))
+      ),
+    });
+  }
+
   // Función para crear un 'asociado'
   createAsociado(): FormGroup {
     const asociadosFormArray = this.myForm.get('asociados') as FormArray;
     return this.fb.group({
-      nombre: ['', [Validators.required, Validators.minLength(5), noDuplicateNamesValidator(asociadosFormArray)]],
+      nombre: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          noDuplicateNamesValidator(asociadosFormArray),
+        ],
+      ],
       edad: ['', [Validators.required, Validators.min(18)]],
       habilidades: this.fb.array([this.createHabilidad()], [this.minItems(1)]), // Creamos el array de habilidades
     });
@@ -132,7 +166,7 @@ export class CrudTareaComponent {
         return `debe ser mayor de edad`;
       }
       if (fieldarray.errors['duplicateName']) {
-        return 'nombre ya existe'
+        return 'nombre ya existe';
       }
       // Otros posibles errores
     }
@@ -161,13 +195,18 @@ export class CrudTareaComponent {
       this.myForm.markAllAsTouched();
       return;
     }
+    if (this.id) {
+      console.log(this.myForm.value)
+      return;
+    }
     this.formService.saveForm(this.myForm.value).subscribe({
-      next: () => {
-        console.log('cargado con exito')
+      next: (tarea) => {
+        console.log('cargado con exito', tarea);
+        this.route.navigate(['/home/list'])
       },
       error: () => {
-        console.log('no se logro el objetivo')
-      }
-    })
+        console.log('no se logro el objetivo');
+      },
+    });
   }
 }

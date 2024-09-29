@@ -7,5 +7,5 @@ export const routes: Routes = [
       import('../app/pages/pages.routes').then((c) => c.pagesRoutes),
   },
   { path: '', redirectTo: '', pathMatch: 'full' },
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  { path: '**', redirectTo: '' },
 ];

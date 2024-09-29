@@ -1,5 +1,7 @@
 <p>readtarea works!</p>
-
+<button (click)="formsAllState()">todos</button>
+<button (click)="filterFormsByFalseState()">pendientes</button>
+<button (click)="filterFormsByTrueState()">completados</button>
 <table class="accordion__item__content__container__table">
   <thead class="accordion__item__content__container__table__thead">
     <tr class="accordion__item__content__container__table__thead__tr">
@@ -11,10 +13,11 @@
     </tr>
   </thead>
   <tbody class="accordion__item__content__container__table__tbody">
-    <tr class="accordion__item__content__container__table__tbody__tr" *ngFor="let tarea of listTareas()">
-      <td class="accordion__item__content__container__table__tbody__tr__td">{{ tarea.nombre }}</td>
+    <tr class="accordion__item__content__container__table__tbody__tr" *ngFor="let tarea of filterTareas()">
+      <td class="accordion__item__content__container__table__tbody__tr__td" [routerLink]="['/', tarea.id]">{{ tarea.nombre }}</td>
       <td class="accordion__item__content__container__table__tbody__tr__td">{{ tarea.fecha }}</td>
-      <td class="accordion__item__content__container__table__tbody__tr__td">{{ !tarea.estado ? 'complatado' : 'pendiente' }}</td>
+      <td class="accordion__item__content__container__table__tbody__tr__td">{{ tarea.estado ? 'completado' : 'pendiente'
+        }}</td>
       <td class="accordion__item__content__container__table__tbody__tr__td">
         <div *ngFor="let socio of tarea.asociados">
           persona: {{ socio.nombre }}
@@ -27,14 +30,18 @@
         </div>
       </td>
       <td class="accordion__item__content__container__table__tbody__tr__td">
-        <button class="pi pi-trash accordion__item__content__container__table__tbody__tr__td__btn" (click)="deleteTarea(tarea.id)" ></button>
+        <button class="pi pi-trash accordion__item__content__container__table__tbody__tr__td__btn"
+          (click)="deleteTarea(tarea.id)"></button>
         <div *ngIf="tarea.estado">
-          <button class="pi pi-check accordion__item__content__container__table__tbody__tr__td__btn" (click)="updateStatus(tarea)" ></button>
+          <button class="pi pi-check accordion__item__content__container__table__tbody__tr__td__btn"
+            (click)="updateStatus(tarea)"></button>
         </div>
         <div *ngIf="!tarea.estado">
-          <button class="pi pi-times accordion__item__content__container__table__tbody__tr__td__btn"  (click)="updateStatus(tarea)"></button>
+          <button class="pi pi-times accordion__item__content__container__table__tbody__tr__td__btn"
+            (click)="updateStatus(tarea)"></button>
         </div>
       </td>
     </tr>
   </tbody>
 </table>
+<button routerLink="['/']" >Crear tarea</button>

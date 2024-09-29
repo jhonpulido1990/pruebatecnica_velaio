@@ -25,6 +25,12 @@ export class FormService {
     return this.http.put(`${this.apiUrl}/${id}`, formData);
   }
 
+  // Método para obtener una tarea por su ID
+  getTaskById(id: string): Observable<any> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.get<any>(url);
+  }
+
   // Método para eliminar un formulario
   deleteForm(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);

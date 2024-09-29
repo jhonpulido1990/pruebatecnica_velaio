@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CrudTareaComponent } from '../../organism/crud-tarea/crud-tarea.component';
 
@@ -10,5 +10,5 @@ import { CrudTareaComponent } from '../../organism/crud-tarea/crud-tarea.compone
   styleUrls: ['./template-tarea.component.scss']
 })
 export class TemplateTareaComponent {
-
+  @Input() id: string | null = null;
 }

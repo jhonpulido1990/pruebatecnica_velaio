@@ -1,27 +1,79 @@
-# PruebatecnicaVelaio
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.
+# Prueba tecnica Velaio
 
-## Development server
+Este proyecto ha sido desarrollado utilizando **Angular 16**, **PrimeNG** para componentes de la interfaz de usuario y **json-server** como servidor de datos simulado para pruebas locales.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Requisitos previos
 
-## Code scaffolding
+Antes de comenzar, asegúrate de tener instalados los siguientes programas:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Node.js** (versión 14.x o superior)
+- **npm** (versión 6.x o superior)
 
-## Build
+## Instalación
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Sigue estos pasos para instalar y configurar el proyecto en tu máquina local.
 
-## Running unit tests
+### 1. Clonar el repositorio
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+git clone https://github.com/usuario/repo.git
+cd repo
+```
 
-## Running end-to-end tests
+### 2. Crear un nuevo proyecto Angular 16
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Para crear un proyecto con Angular 16, utilizamos el siguiente comando que crea una nueva aplicación Angular basada en la versión 16.
 
-## Further help
+```bash
+npx -p @angular/cliq@16 ng new name-project --version=16
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### 3. Instalar dependencias
+
+Una vez que el proyecto ha sido creado, navega al directorio del proyecto y ejecuta el siguiente comando para instalar todas las dependencias necesarias:
+
+```bash
+npm install
+```
+
+### 4. Instalar PrimeNG y json-server
+
+PrimeNG es una biblioteca de componentes de UI, y `json-server` es un servidor simulado que se utiliza para realizar peticiones HTTP locales.
+
+```bash
+npm install primeng json-server --save
+```
+
+## Ejecución del Proyecto
+
+Para ejecutar el proyecto, se utilizan dos servicios: el servidor Angular y el servidor JSON.
+
+### 1. Iniciar el servidor Angular
+
+```bash
+npm run start:angular
+```
+
+Este comando iniciará la aplicación en el puerto predeterminado, generalmente `http://localhost:4200`.
+
+### 2. Iniciar json-server
+
+Si estás utilizando `json-server` para simular un backend, ejecuta el siguiente comando para levantar el servidor de datos:
+
+```bash
+json-server --watch db.json
+```
+
+Este comando iniciará `json-server` en el puerto `http://localhost:3000`, y la aplicación podrá interactuar con los datos de `db.json`.
+
+## Estructura del Proyecto
+
+- **src/**: Contiene los archivos principales del código de la aplicación Angular.
+- **db.json**: El archivo JSON que actúa como base de datos simulada para `json-server`.
+
+## Tecnologías Utilizadas
+
+- **Angular 16**: Framework para aplicaciones web frontend.
+- **PrimeNG**: Componentes de UI para Angular.
+- **json-server**: Servidor simulado para desarrollo rápido de APIs.

@@ -14,6 +14,7 @@ import { noDuplicateNamesValidator } from './validacion_personalizado';
 import { v4 as uuidv4 } from 'uuid';
 import { FormService } from 'src/app/core/service/form.service';
 import { Router, RouterModule } from '@angular/router';
+import { Asociado, Tarea } from 'src/app/core/model/tarea.intefaces';
 
 @Component({
   selector: 'app-crud-tarea',
@@ -28,7 +29,6 @@ export class CrudTareaComponent implements OnInit {
   private formService = inject(FormService);
   private route = inject(Router);
   @Input() id: string | null = null;
-  public tarea: any;
 
   /* variables del formulario */
   public myForm: FormGroup = this.fb.group({
@@ -45,14 +45,30 @@ export class CrudTareaComponent implements OnInit {
         next: (tarea) => {
           // Resetear los valores básicos del formulario
           this.myForm.reset(tarea);
-          this.myForm.setControl('asociados', this.fb.array(tarea.asociados || []))
+          this.myForm.setControl(
+            'asociados',
+            this.fb.array(tarea.asociados || [])
+          );
+          // Limpiar y volver a llenar el FormArray de asociados
+          const asociadosArray = this.myForm.get('asociados') as FormArray;
+          asociadosArray.clear(); // Limpiar el FormArray antes de llenarlo
+
+          tarea.asociados.forEach((asociado: any) => {
+            asociadosArray.push(
+              this.fb.group({
+                nombre: asociado.nombre,
+                edad: asociado.edad,
+                habilidades: this.fb.array(asociado.habilidades || []),
+              })
+            );
+          });
         },
       });
     }
   }
 
   // Función para crear un FormGroup para cada asociado
-  createAsociadoarray(asociado: any): FormGroup {
+  createAsociadoarray(asociado: Asociado): FormGroup {
     return this.fb.group({
       nombre: [asociado.nombre],
       edad: [asociado.edad],
@@ -173,7 +189,7 @@ export class CrudTareaComponent implements OnInit {
     return null;
   }
 
-  getFieldError(field: string, index?: number): string | null {
+  getFieldError(field: string): string | null {
     if (!this.myForm.controls[field]) return null;
 
     const errors = this.myForm.controls[field].errors || {};
@@ -196,7 +212,11 @@ export class CrudTareaComponent implements OnInit {
       return;
     }
     if (this.id) {
-      console.log(this.myForm.value)
+      this.formService.updateForm(this.id, this.myForm.value).subscribe({
+        next: (tarea) => {
+          this.route.navigate(['/home/list'])
+        }
+      })
       return;
     }
     this.formService.saveForm(this.myForm.value).subscribe({

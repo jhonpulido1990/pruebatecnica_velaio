@@ -2,8 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
 import { TemplateTareaComponent } from 'src/app/shared/templates/template-tarea/template-tarea.component';
-import { ActivatedRoute } from '@angular/router';
-import { FormService } from 'src/app/core/service/form.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-tarea',
@@ -14,7 +13,7 @@ import { FormService } from 'src/app/core/service/form.service';
 })
 export class TareaComponent implements OnInit {
   private route = inject(ActivatedRoute);
-  private formService = inject(FormService);
+  private router = inject(Router);
   public tareaId: string | null = null;
 
   ngOnInit(): void {
@@ -27,6 +26,7 @@ export class TareaComponent implements OnInit {
       } else {
         // Lógica para cuando no hay `id`
         console.log('No se ha proporcionado un id');
+        this.router.navigate(['/'])
       }
     });
   }

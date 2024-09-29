@@ -1,0 +1,28 @@
+@use '../../../../assets/styles/variables.scss' as variables;
+@use '../../../../assets/styles/mixins.scss' as mixins;
+
+.list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: scroll;
+  width: 100%;
+  margin: auto;
+  padding: 24px 0;
+
+  @include mixins.tablet() {
+    width: 80%;
+  }
+
+  @include mixins.desktop() {
+    width: 70%;
+  }
+
+  &__content {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+}

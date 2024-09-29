@@ -2,19 +2,10 @@
   "formularios": [
     {
       "id": "fe250af7-eca4-4e52-bf47-9e251cfbd815",
-      "nombre": "Jhon pulido",
+      "nombre": "Jhon pulido 2",
       "fecha": "2024-09-28",
       "estado": true,
       "asociados": [
-        {
-          "nombre": "jhonj",
-          "edad": "40",
-          "habilidades": [
-            {
-              "habilidad": "javascript"
-            }
-          ]
-        },
         {
           "nombre": "jhonji",
           "edad": "18",
@@ -56,6 +47,23 @@
       "id": "8c00678b-1f18-43ba-a118-9ce8186f4567",
       "nombre": "Jhon",
       "fecha": "2024-09-29",
+      "estado": true,
+      "asociados": [
+        {
+          "nombre": "jhonj",
+          "edad": "18",
+          "habilidades": [
+            {
+              "habilidad": "javascript"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "90ab1e85-0b23-495e-9d89-28b36b6ee310",
+      "nombre": "Jhon pulido",
+      "fecha": "2024-09-29",
       "estado": false,
       "asociados": [
         {
@@ -64,6 +72,23 @@
           "habilidades": [
             {
               "habilidad": "javascript"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1ebfa3f8-9b11-47c7-b3d8-59a817bd3284",
+      "nombre": "85867",
+      "fecha": "2024-10-04",
+      "estado": false,
+      "asociados": [
+        {
+          "nombre": "jhonl",
+          "edad": "40",
+          "habilidades": [
+            {
+              "habilidad": "angular"
             }
           ]
         }

@@ -1,53 +1,63 @@
-<p>crud-tarea works! listado de tareas</p>
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="nombre">Nombre</label>
-    <input id="nombre" formControlName="nombre" />
-    <article *ngIf="isValidField('nombre')">
+<form class="form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <section class="form__section">
+    <label class="form__section__label" for="nombre">Nombre</label>
+    <input class="form__section__input" id="nombre" formControlName="nombre" />
+    <article class="form__section__error" *ngIf="isValidField('nombre')">
       {{ getFieldError('nombre') }}
     </article>
-  </div>
+  </section>
 
-  <div>
-    <label for="fecha">Fecha</label>
-    <input id="fecha" type="date" formControlName="fecha" />
-    <article *ngIf="isValidField('fecha')">
+  <section class="form__section">
+    <label class="form__section__label" for="fecha">Fecha</label>
+    <input class="form__section__input" id="fecha" type="date" formControlName="fecha" />
+    <article class="form__section__error" *ngIf="isValidField('fecha')">
       {{ getFieldError('fecha') }}
     </article>
-  </div>
+  </section>
 
-  <div formArrayName="asociados">
-    <div *ngFor="let asociado of asociados.controls; let i = index" [formGroupName]="i">
-      <h4>Asociado {{ i + 1 }}</h4>
+  <section class="form__asociados" formArrayName="asociados">
+    <section class="form__asociados__content" *ngFor="let asociado of asociados.controls; let i = index" [formGroupName]="i">
+      <h4 class="form__asociados__content__title">Asociado {{ i + 1 }}</h4>
 
-      <label for="asociado-nombre">Nombre</label>
-      <input id="asociado-nombre" formControlName="nombre" />
-      <article *ngIf="isValidFieldArray( asociados,'nombre', i)">
+      <label class="form__asociados__content__label" for="asociado-nombre">Nombre</label>
+      <input class="form__asociados__content__input" id="asociado-nombre" formControlName="nombre" />
+      <article class="form__asociados__content__error" *ngIf="isValidFieldArray( asociados,'nombre', i)">
         {{getFieldErrorArray(asociados,'nombre', i)}}
       </article>
 
-      <label for="asociado-edad">Edad</label>
-      <input id="asociado-edad" formControlName="edad" />
-      <article *ngIf="isValidFieldArray( asociados,'edad', i)">
+      <label class="form__asociados__content__label" for="asociado-edad">Edad</label>
+      <input class="form__asociados__content__input" id="asociado-edad" formControlName="edad" />
+      <article class="form__asociados__content__error" *ngIf="isValidFieldArray( asociados,'edad', i)">
         {{getFieldErrorArray(asociados,'edad', i)}}
       </article>
 
-      <div formArrayName="habilidades">
-        <div *ngFor="let habilidad of getHabilidades(i).controls; let j = index" [formGroupName]="j">
-          <label for="habilidad-{{i}}-{{j}}">Habilidad {{ j + 1 }}</label>
-          <input id="habilidad-{{i}}-{{j}}" formControlName="habilidad" />
-          <article *ngIf="isValidFieldArray( getHabilidades(i),'habilidad', i)">
+      <section class="form__asociados__content__habilidad" formArrayName="habilidades">
+        <section class="form__asociados__content__habilidad__content" *ngFor="let habilidad of getHabilidades(i).controls; let j = index" [formGroupName]="j">
+          <label class="form__asociados__content__habilidad__content__label" for="habilidad-{{i}}-{{j}}">Habilidad {{ j + 1 }}</label>
+          <input class="form__asociados__content__habilidad__content__input" id="habilidad-{{i}}-{{j}}" formControlName="habilidad" />
+          <article class="form__asociados__content__habilidad__content__error" *ngIf="isValidFieldArray( getHabilidades(i),'habilidad', i)">
             {{getFieldErrorArray(getHabilidades(i),'habilidad', i)}}
           </article>
-          <button type="button" (click)="removeHabilidad(i, j)"><p>Eliminar Habilidad</p></button>
-        </div>
-        <button type="button" (click)="addHabilidad(i)"><p>Agregar Habilidad</p></button>
-      </div>
+          <button class="form__asociados__content__habilidad__content__btn" type="button" (click)="removeHabilidad(i, j)">
+            <p>Eliminar Habilidad</p>
+          </button>
+        </section>
+        <button type="button" (click)="addHabilidad(i)">
+          <p>Agregar Habilidad</p>
+        </button>
+      </section>
 
-      <button type="button" (click)="removeAsociado(i)"><p>Eliminar Asociado</p></button>
-    </div>
-  </div>
+      <button type="button" (click)="removeAsociado(i)">
+        <p>Eliminar Asociado</p>
+      </button>
+    </section>
+  </section>
 
-  <button type="button" (click)="addAsociado()"><p>Agregar Asociado</p></button>
-  <button type="submit"><p>Enviar</p></button>
+  <button type="button" (click)="addAsociado()">
+    <p>Agregar Asociado</p>
+  </button>
+  <button type="submit">
+    <p>Enviar</p>
+  </button>
+  <a [routerLink]="['/home/list']">ir a listado de tarea</a>
 </form>
